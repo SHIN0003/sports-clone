@@ -1,5 +1,5 @@
-import { Games } from './games';
+import { GamesProps } from './games';
 
 export interface ApiResponse {
-  response: Games[];
+  response: GamesProps[];
 }

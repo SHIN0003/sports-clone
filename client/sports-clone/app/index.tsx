@@ -3,7 +3,7 @@ import { Button } from '~/components/Button';
 import { Container } from '~/components/Container';
 import { ScreenContent } from '~/components/ScreenContent';
 import { ScrollView, Platform, ActivityIndicator } from 'react-native'
-import { Games } from './interfaces/games';
+import { GamesProps } from './interfaces/games';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import config from '../tamagui.config';
@@ -16,12 +16,12 @@ export default function Home() {
   const baseURL =
     Platform.OS === 'web'
       ? 'http://localhost:3000'
-      : 'http://10.0.0.187:3000';
+      : 'http://172.31.65.67:3000';
 
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await axios.get(`${baseURL}/live-games`);
+        const response = await axios.get(`${baseURL}/gameid`);
         setJson(response.data);
         console.log(json)
       } catch (error) {

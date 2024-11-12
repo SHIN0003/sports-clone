@@ -1,4 +1,4 @@
-export interface Games {
+export interface GamesProps {
     id: number;
     league: string;
     season: number;
