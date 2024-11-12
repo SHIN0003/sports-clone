@@ -41,6 +41,7 @@ app.get('/', (req, res) => {
 app.get('/current_season', async (req, res) => {
   try {
     const { season } = req.query
+    console.log("current season visited")
     const response = await axios.get('https://api-nba-v1.p.rapidapi.com/games', { 
         headers,
         params: {
@@ -70,6 +71,22 @@ app.get('/live-games', async (req, res) => {
         console.error(error);
         res.status(500).send('Error fetching live games');
     }
+});
+
+app.get('/gameid', async (req, res) => {
+  try {
+      const response = await axios.get('https://api-nba-v1.p.rapidapi.com/games', { 
+          headers,
+          params: {
+            id: '8899'
+          }
+          
+      });
+      res.json(response.data);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error fetching game id');
+  }
 });
 
 // Start the server
