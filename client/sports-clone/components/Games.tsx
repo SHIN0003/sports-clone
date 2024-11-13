@@ -2,9 +2,9 @@ import React from 'react';
 import { ScrollView, useWindowDimensions } from 'react-native';
 import { XStack, YStack, Text, Card, H4, Paragraph, Separator, Image } from 'tamagui';
 import { ApiResponse } from '~/app/interfaces/ApiResponse';
-import { GameStatus } from './ GameStatus';
-import { VisitorTeamInfo } from './VisitorTeam';
-import { HomeTeamInfo } from './HomeTeam'
+import { GameStatus } from './game-components/ GameStatus';
+import { VisitorTeamInfo } from './game-components/VisitorTeam';
+import { HomeTeamInfo } from './game-components/HomeTeam'
 
 type GamesProps = {
   path: string;
