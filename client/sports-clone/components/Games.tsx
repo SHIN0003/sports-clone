@@ -2,6 +2,9 @@ import React from 'react';
 import { ScrollView, useWindowDimensions } from 'react-native';
 import { XStack, YStack, Text, Card, H4, Paragraph, Separator, Image } from 'tamagui';
 import { ApiResponse } from '~/app/interfaces/ApiResponse';
+import { GameStatus } from './ GameStatus';
+import { VisitorTeamInfo } from './VisitorTeam';
+import { HomeTeamInfo } from './HomeTeam'
 
 type GamesProps = {
   path: string;
@@ -68,98 +71,3 @@ export const Games = ({ path, gamesData }: GamesProps) => {
   );
 };
 
-type TeamInfoProps = {
-  name: string;
-  score: number;
-  logo: string;
-  isWinner: boolean;
-  isMobile: boolean;
-};
-
-const HomeTeamInfo = ({ name, score, logo, isWinner, isMobile }: TeamInfoProps) => (
-  <XStack alignItems="center" space="$2" width={isMobile ? "45%" : "40%"}>
-    <YStack alignItems="flex-start" flex={1}>
-      <Text
-        numberOfLines={2}
-        fontWeight="bold"
-        fontSize={isMobile ? "$3" : "$4"}
-        color={isWinner ? '$green10' : '$gray11'}
-      >
-        {name}
-      </Text>
-      <Text
-        fontSize={isMobile ? "$3" : "$7"}
-        fontWeight="bold"
-        color={isWinner ? '$green10' : '$gray11'}
-      >
-        {score}
-      </Text>
-    </YStack>
-    <Image
-      source={{ uri: logo }}
-      width={isMobile ? 40 : 50}
-      height={isMobile ? 40 : 50}
-      resizeMode="contain"
-    />
-  </XStack>
-);
-
-const VisitorTeamInfo = ({ name, score, logo, isWinner, isMobile }: TeamInfoProps) => (
-  <XStack alignItems="center" space="$2" width={isMobile ? "45%" : "40%"} justifyContent="flex-end">
-    <Image
-      source={{ uri: logo }}
-      width={isMobile ? 40 : 50}
-      height={isMobile ? 40 : 50}
-      resizeMode="contain"
-    />
-    <YStack alignItems="flex-end" flex={1}>
-      <Text
-        numberOfLines={2}
-        fontWeight="bold"
-        fontSize={isMobile ? "$3" : "$4"}
-        color={isWinner ? '$green10' : '$gray11'}
-        textAlign="right"
-      >
-        {name}
-      </Text>
-      <Text
-        fontSize={isMobile ? "$6" : "$7"}
-        fontWeight="bold"
-        color={isWinner ? '$green10' : '$gray11'}
-      >
-        {score}
-      </Text>
-    </YStack>
-  </XStack>
-);
-
-
-type GameStatusProp = {
-  finished: string;
-  clock: string;
-  halftime: boolean;
-  period: number;
-  endofperiod: boolean;
-};
-
-const GameStatus = ({ finished, clock, halftime, period, endofperiod }: GameStatusProp) => {
-  let statusMessage = "";
-
-  if (finished === "Finished") {
-    statusMessage = "Game Over";
-  } else if (halftime) {
-    statusMessage = "Halftime";
-  } else if (endofperiod) {
-    statusMessage = `End of Period ${period}`;
-  } else {
-    statusMessage = `Period ${period} - Clock: ${clock}`;
-  }
-
-  return (
-    <XStack alignItems="center" justifyContent="center" padding="$2">
-      <Text fontSize="$3" color="$gray10">
-        {statusMessage}
-      </Text>
-    </XStack>
-  );
-};
