@@ -16,12 +16,12 @@ export default function Home() {
   const baseURL =
     Platform.OS === 'web'
       ? 'http://localhost:3000'
-      : 'http://172.31.65.67:3000';
+      : 'http://172.31.71.233:3000';
 
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await axios.get(`${baseURL}/live-games`);
+        const response = await axios.get(`${baseURL}/gameid`);
         setJson(response.data);
         console.log(json)
       } catch (error) {

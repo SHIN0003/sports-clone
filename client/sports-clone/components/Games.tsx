@@ -20,9 +20,19 @@ export const Games = ({ path, gamesData }: GamesProps) => {
           gamesData.response.map((game, index) => (
             <Card key={index} elevate size="$2" bordered width="100%" animation="bouncy" hoverStyle={{ scale: 0.925 }} pressStyle={{ scale: 0.875 }}>
               <Card.Header padded>
-                <Paragraph size={isMobile ? "$2" : "$3"} color="$gray10">
-                  {new Date(game.date.start).toLocaleDateString()}
-                </Paragraph>
+                  <XStack justifyContent="space-between" width="100%">
+                    <Paragraph size={isMobile ? "$2" : "$3"} color="$gray10">
+                      {new Date(game.date.start).toLocaleDateString()}
+                    </Paragraph>
+                    <GameStatus
+                      finished={game.status.long}
+                      clock={game.status.clock}
+                      halftime={game.status.halftime}
+                      period={game.periods.current}
+                      endofperiod={game.periods.endOfPeriod}
+                    >
+                    </GameStatus>
+                </XStack>
               </Card.Header>
               <Separator />
               <Card.Footer padded>
@@ -78,7 +88,7 @@ const HomeTeamInfo = ({ name, score, logo, isWinner, isMobile }: TeamInfoProps) 
         {name}
       </Text>
       <Text
-        fontSize={isMobile ? "$6" : "$7"}
+        fontSize={isMobile ? "$3" : "$7"}
         fontWeight="bold"
         color={isWinner ? '$green10' : '$gray11'}
       >
@@ -122,3 +132,34 @@ const VisitorTeamInfo = ({ name, score, logo, isWinner, isMobile }: TeamInfoProp
     </YStack>
   </XStack>
 );
+
+
+type GameStatusProp = {
+  finished: string;
+  clock: string;
+  halftime: boolean;
+  period: number;
+  endofperiod: boolean;
+};
+
+const GameStatus = ({ finished, clock, halftime, period, endofperiod }: GameStatusProp) => {
+  let statusMessage = "";
+
+  if (finished === "Finished") {
+    statusMessage = "Game Over";
+  } else if (halftime) {
+    statusMessage = "Halftime";
+  } else if (endofperiod) {
+    statusMessage = `End of Period ${period}`;
+  } else {
+    statusMessage = `Period ${period} - Clock: ${clock}`;
+  }
+
+  return (
+    <XStack alignItems="center" justifyContent="center" padding="$2">
+      <Text fontSize="$3" color="$gray10">
+        {statusMessage}
+      </Text>
+    </XStack>
+  );
+};
