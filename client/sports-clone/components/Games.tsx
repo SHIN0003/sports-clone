@@ -18,7 +18,7 @@ export const Games = ({ path, gamesData }: GamesProps) => {
         <H4 textAlign="center" fontSize={isMobile ? "$6" : "$8"}>Game Results</H4>
         {gamesData && gamesData.response.length > 0 ? (
           gamesData.response.map((game, index) => (
-            <Card key={index} elevate size="$4" bordered width="100%">
+            <Card key={index} elevate size="$2" bordered width="100%" animation="bouncy" hoverStyle={{ scale: 0.925 }} pressStyle={{ scale: 0.875 }}>
               <Card.Header padded>
                 <Paragraph size={isMobile ? "$2" : "$3"} color="$gray10">
                   {new Date(game.date.start).toLocaleDateString()}

@@ -21,7 +21,7 @@ export default function Home() {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await axios.get(`${baseURL}/gameid`);
+        const response = await axios.get(`${baseURL}/live-games`);
         setJson(response.data);
         console.log(json)
       } catch (error) {
@@ -55,7 +55,7 @@ export default function Home() {
         <ScrollView>
           <ScreenContent path="app/index.tsx" title="Home" gamesData={json} />
           <Link href={{ pathname: '/details', params: { name: 'Dan' } }} asChild>
-            <Button title="Show Details" />
+            <Button title="Show Details" alignSelf='center' />
           </Link>
         </ScrollView>
       </Container>
